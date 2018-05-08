@@ -265,23 +265,53 @@ Considering that we only use 8 GPUs at most for now, it is less likely to be dra
 
 Assume the total amount of data is M bytes, and it is evenly distributed among N GPUs. Each GPU does $2(N-1)$ iteraions and sends and receives M/N bytes data in each iteration, so each GPU sents and receives $2X*(N-1)/N$ bytes data during the whole allreduce process. More importantly, because $(N-1)/N$ goes to $1$ with N growing larger, communication overhead for each GPU has a predictable and acceptable upper bound.
 
-% \subsection{Memory monger}
+\subsection{Memory monger}
 
+Cifar10 dataset is a relatively small one. When deep neural network is applied in some real scenarios like Cityscapes,  the ResNet-50 mini-batch size on single GTX 1080Ti graphics card is 3 at most, which is far from enough. 
 
-% Memonger\cite{tianqichen-memonger} offers a more memory efficient training algorithm with a little extra computation cost by using automatic in-place operation and memory sharing optimization through computation graph analysis. It drops result of low cost operations and provides planning algorithm to give a sublinear memory cost model. The training upper bound of mini-batch size is increased to 8 with ResNet-50 in single GPU for cityscapes dataset.
+Memonger\cite{tianqichen-memonger} offers a more memory efficient training algorithm with a little extra computation cost by using automatic in-place operation and memory sharing optimization through computation graph analysis. It drops result of low cost operations and provides planning algorithm to give a sublinear memory cost model. The training upper bound of mini-batch size is increased to 8 with ResNet-50 in single GPU for cityscapes dataset.
 
-% \begin{figure}[h]
-%     \begin{center}
-%     \fbox{\includegraphics[width=0.8\linewidth]{figure/memonger.png}}
-%     \caption{Memonger optimized gradient graph generation exmaple }%
-%     \label{fig:Memonger}
-%     \end{center}
-%     \end{figure}
+\begin{figure}[h]
+    \begin{center}
+    \fbox{\includegraphics[width=0.8\linewidth]{figure/memonger.png}}
+    \caption{Memonger optimized gradient graph generation exmaple }%
+    \label{fig:Memonger}
+    \end{center}
+    \end{figure}
 
 \subsection{Adaptive global BN}
 
 
-% NCCL\cite{jeaugey2017nccl}, The NVIDIA Collective Communications Library, implements multi-GPU and multi-node collective communication primitives which is specially optimized for NVIDIA GPUs. It provides methods like allgather/allreduce/broadcast that are optimized to achieve high bandwidth over PCIe and NVLink high-spped interconnect, and automatic topology detection is used to determine optimal communication path.Any number of GPUs ca nbe used. as long as they reside in a single node.Furthermore, NCCL implements ring-based collectives to achieve maximum bandwidth by indexing the GPUs into the optimal ring order under the hood.
+There is no doubt that both data sychronization and Memonger make the training process take longer to finish. But we can set a mechanism to automatically determine whether to use these two methods or not respectively to balance efficiency and accuracy.
+We use the history data including batch size and training accuracy of a specific neural network to train a SVM classifier. Therefore, our Adaptive Global BN algorithm can choose whether to apply Memonger if necessary and does not use Global BN until the training accuracy reaches a certain value to avoid communication among devices overhead which is determined by our SVM classifier.
+
+% \begin{algorithm}[htbp] 
+% \caption{Adaptive Global BN algorithm} %算法的名字
+% \label{alg:reduce}
+% \begin{algorithmic}[1]
+% % \State Parameter: $BZ_{max}$,$IsConverged$
+% % \State Input: $u_i$,$v_i$
+% % \State Output: $u$,$v$
+% \State accuracy = evaluate(parameters)
+% \If {SVM(BZ, accuracy)}
+% % \State parameters = GBN(data)
+% \State Pre-pocessing
+% \State Reduce
+% \State Normalization
+% \Else
+% % \State parameters = BN(data)
+% \State Original BN algorithm
+% \EndIf
+% \end{algorithmic}
+% \end{algorithm}
+
+
+% The classifier is trained based on the history data including batch size and training accuracy of a specific neural network. 
+% The classifier returns $True$ if the accuracy is relatively high under certain batch size, and then the parameters will be 
+% updated according to GBN algorithm. In addition, the classifier returns $False$ if the batch size is large enough and the parameters 
+% will be updated  according to original BN algorithm.
+
+
 
 
 

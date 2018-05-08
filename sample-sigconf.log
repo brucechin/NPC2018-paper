@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 15:29
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 18:03
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -715,12 +715,15 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count133
 \@thisrulewidth=\dimen155
 )
-(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
-Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@line=\count134
 \c@ALG@rem=\count135
@@ -732,6 +735,8 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@storecount=\count139
 \c@ALG@tmpcounter=\count140
 \ALG@tmplength=\skip70
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
@@ -742,14 +747,17 @@ nment
 \c@theorem=\count142
 
 Excluding comment 'screenonly' Include comment 'printonly'
-Include comment 'anonsuppress' (./sample-sigconf.aux)
+Include comment 'anonsuppress' (./sample-sigconf.aux
+
+LaTeX Warning: Label `fig:Memonger' multiply defined.
+
+)
 \openout1 = `sample-sigconf.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 40.
 LaTeX Font Info:    Try loading font information for OML+nxlmi on input line 40
 .
-
-(/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
 LaTeX Font Info:    ... okay on input line 40.
@@ -860,9 +868,6 @@ LaTeX Info: Redefining \nameref on input line 40.
 \@outlinefile=\write5
 \openout5 = `sample-sigconf.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -976,9 +981,6 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 8.0pt on input line 151.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 151.
-
-LaTeX Warning: Reference `TotPages' on page 1 undefined on input line 151.
-
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 151.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
@@ -992,39 +994,11 @@ Package hyperref Warning: Option `pdfdisplaydoctitle' has already been used,
 (hyperref)                setting the option has no effect on input line 151.
 
 (./samplebody-conf.tex
-
-Package natbib Warning: Citation `ioffe2015batch' on page 1 undefined on input 
-line 3.
-
 File: figure/noreduce.png Graphic file (type QTm)
-<use  "figure/noreduce.png" >
-
-Package natbib Warning: Citation `keskar2016large' on page 1 undefined on input
- line 13.
-
-
-Package natbib Warning: Citation `krizhevsky2012imagenet' on page 1 undefined o
-n input line 13.
-
-
+ <use  "figure/noreduce.png" >
 Overfull \hbox (2.13826pt too wide) in paragraph at lines 13--14
 \T1/LinuxLibertineT-TLF/m/n/9 speed greatly. As is well-known that the train-in
 g ac-cu-racy in-creases
- []
-
-
-Package natbib Warning: Citation `muli-ps' on page 1 undefined on input line 37
-.
-
-
-Package natbib Warning: Citation `chen2015mxnet' on page 1 undefined on input l
-ine 37.
-
-
-Overfull \hbox (2.12405pt too wide) in paragraph at lines 37--38
-\T1/LinuxLibertineT-TLF/m/n/9 flex-i-ble and ef-fi-cient li-brary for Deep Lear
-n-ing[\T1/LinuxLibertineT-TLF/b/n/9 ? \T1/LinuxLibertineT-TLF/m/n/9 ]. Pa-ram-e
--ter server
  []
 
 
@@ -1044,19 +1018,11 @@ put line 102.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Package natbib Warning: Citation `krizhevsky2014cifar' on page 2 undefined on i
-nput line 216.
-
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 217.
 [2.2]
 File: figure/accVsBz.eps Graphic file (type eps)
  <figure/accVsBz.eps>
-
-LaTeX Warning: Reference `fig:accVsBz' on page 3 undefined on input line 244.
-
-
 Overfull \hbox (6.45648pt too wide) in paragraph at lines 251--252
 \T1/LinuxLibertineT-TLF/m/n/9 has brought up a new bandwidth-optimal allre-duce
  al-go-rithm named
@@ -1068,23 +1034,20 @@ Overfull \hbox (4.39816pt too wide) in paragraph at lines 251--252
 he com-mu-ni-ca-tion over-
  []
 
+File: figure/memonger.png Graphic file (type QTm)
+<use  "figure/memonger.png" >
 
-Package natbib Warning: Citation `jeaugey2017nccl' on page 3 undefined on input
- line 253.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Overfull \hbox (15.02975pt too wide) in paragraph at lines 288--289
+[3.3]
+Overfull \hbox (15.02975pt too wide) in paragraph at lines 318--319
 \T1/LinuxLibertineT-TLF/m/n/9 the model has no con-ver-gence. $\OML/nxlmi/m/it/
 9 BZ[]$ \T1/LinuxLibertineT-TLF/m/n/9 is user-defined and $\OML/nxlmi/m/it/9 Is
 Converged$
  []
 
-
-LaTeX Warning: Reference `fig:speedVsBz' on page 3 undefined on input line 367.
-
-
 File: figure/speedVsBz.eps Graphic file (type eps)
-<figure/speedVsBz.eps> [3.3] Processing 'acks' comment.
+<figure/speedVsBz.eps> Processing 'acks' comment.
 \openout4 = `comment.cut'.
 
 
@@ -1095,38 +1058,24 @@ Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
-)
-
-Package natbib Warning: There were undefined citations.
-
-[4.4
-
-]
+) [4.4]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
- (./sample-sigconf.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
+ (./sample-sigconf.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 158.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 158.
 
 
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17205 strings out of 493638
- 256027 string characters out of 6146797
- 369874 words of memory out of 5000000
- 20168 multiletter control sequences out of 15000+600000
+ 17400 strings out of 493638
+ 259180 string characters out of 6146797
+ 374884 words of memory out of 5000000
+ 20359 multiletter control sequences out of 15000+600000
  99521 words of font info for 92 fonts, out of 8000000 for 9000
  1489 hyphenation exceptions out of 8191
- 60i,11n,94p,1112b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,94p,1091b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on sample-sigconf.pdf (4 pages).
