@@ -213,7 +213,34 @@ Then in reduce part, we will calculate the \textbf{global} mean of $\psi$ and $\
 As for the batch normalization part is similar to the original BN algorithm except using $\psi$ and $\phi$ calculated in Backward reduce part.
 \section{Refinement}
 
-As we all know, we have to train a deep neural network for hundreds of epochs or even more to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. These strategies are applied to improve our algorithm.
+As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. We evaluate the overhead by using 8 GTX 1080Ti GPU to  train image classification on Cifar10 dataset\cite{} with ResNet-20. The table below shows how much time it takes to train one epoch on average.
+
+\begin{table}[!hbp]
+    \begin{tabular}{|c|c|c|c|}
+        \hline Batch size & Original/s & Global BN/s & Overhead ratio/\% \\
+        \hline    8 & 79.48  &  164.19  & 51.59 \\
+        \hline    16 & 60.72  &  91.32  & 33.51 \\
+        \hline    32 &  31.98   &  44.13  &  27.53 \\
+        \hline    64  &  16.53   &  23.48   & 29.60 \\
+        \hline    128  &  8.47  &  12.27  &  30.96 \\
+        \hline    256  &  4.21  &   7.32  &   42.49 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Also, We compare the gain on training accuracy of Global BN algorithm under different batch size as the figure \ref{fig:accVsBz} shows. The batch size is $BZ$ for the whole devices, so the mini-batch size in a single device $BZ_{mini}=BZ/n$, where $n$ indicates the count of devices. 
+As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
+
+
+
+\begin{figure}[!hbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figure/accVsBz.eps}
+    \caption{Gain of AGBN algorithm on training accuracy under different batch sizes}
+    \label{fig:accVsBz}
+    \end{figure}
+
+These strategies are applied to improve our algorithm.
 
 \subsection{Ring allreduce}
 
@@ -315,10 +342,11 @@ This section is skipped if the batch size $BZ$ is sufficiently large or the mode
 
 \section{Results}
 
-We evaluate the performance of global BN algorithm on eight GTX 1080Ti graphics cards. We compare the training histories of "local" and "global" cases on the identical dataset and neural network, ResNet\cite{szegedy2017inception}. "Local" and "global" indicates the original BN algorithm and AGBN algorithm we proposed respectively.
+% We evaluate the performance of global BN algorithm on eight GTX 1080Ti graphics cards. We compare the training histories of "local" and "global" cases on the identical dataset and neural network, ResNet\cite{szegedy2017inception}. "Local" and "global" indicates the original BN algorithm and AGBN algorithm we proposed respectively.
 
 % \subsection{}
-We evaluate the proposed algorithm on Cifar10 dataset\cite{krizhevsky2014cifar} for image classification and the depth of ResNet is 20. The batch size is $BZ$ for the whole devices, so the mini-batch size in a single device $BZ_{mini}=BZ/n$, where $n$ indicates the count of devices. 
+
+% We evaluate the proposed algorithm on Cifar10 dataset\cite{krizhevsky2014cifar} for image classification and the depth of ResNet is 20. The batch size is $BZ$ for the whole devices, so the mini-batch size in a single device $BZ_{mini}=BZ/n$, where $n$ indicates the count of devices. 
 
 % For the "local" cases, the training accuracy fall off about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. While for the "global" cases, we obtain the same training accuracy no matter for single or multiple devices.
 
@@ -329,13 +357,8 @@ We evaluate the proposed algorithm on Cifar10 dataset\cite{krizhevsky2014cifar} 
 % \label{fig:reduce}
 % \end{figure}
 
-We compare the gain on training accuracy of AGBN algorithm under different batch size as the figure \ref{fig:accVsBz} shows, and for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
-\begin{figure}
-\centering
-\includegraphics[width=0.8\linewidth]{figure/accVsBz.eps}
-\caption{Gain of AGBN algorithm on training accuracy under different batch sizes}
-\label{fig:accVsBz}
-\end{figure}
+% We compare the gain on training accuracy of AGBN algorithm under different batch size as the figure \ref{fig:accVsBz} shows, and for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
+
 
 The communication across all devices in re duce section leads to the speed loss inevitably. Relative to the original BN algorithm, the training speed of GBN algorithm is about 75\% for 4 GPUs and 70\% for 8 GPUs. In our AGBN algorithm, the communication will not occur until the training process converges. For training on Cifar10 with 50 epochs, the average training speed of AGBN algorithm under different batch sizes is shown in figure\ref{fig:speedVsBz} and the training speed increases by about 10\%.
 \begin{figure}

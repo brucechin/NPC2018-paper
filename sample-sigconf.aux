@@ -1,0 +1,70 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\citation{ioffe2015batch}
+\citation{keskar2016large}
+\citation{krizhevsky2012imageneti}
+\citation{muli-ps}
+\citation{chen2015mxnet}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Data-model parallelism resulting from batch normalization layer\relax }}{1}{figure.caption.4}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:localBN}{{1}{1}{Data-model parallelism resulting from batch normalization layer\relax }{figure.caption.4}{}}
+\citation{}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related work}{2}{section.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{2}{section.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic of the process of global BN operator \relax }}{2}{figure.caption.5}}
+\newlabel{fig:Memonger}{{2}{2}{Schematic of the process of global BN operator \relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Forward modification}{2}{subsection.3.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Forward Pre-processing\relax }}{2}{algorithm.1}}
+\newlabel{alg:forward-pre}{{1}{2}{Forward Pre-processing\relax }{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Forward Reduce\relax }}{2}{algorithm.2}}
+\newlabel{alg:forward-reduce}{{2}{2}{Forward Reduce\relax }{algorithm.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Batch normalization\relax }}{2}{algorithm.3}}
+\newlabel{alg:forward-norm}{{3}{2}{Batch normalization\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Backward modification}{2}{subsection.3.2}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Backward pre-processing\relax }}{2}{algorithm.4}}
+\newlabel{alg:backward-pre}{{4}{2}{Backward pre-processing\relax }{algorithm.4}{}}
+\citation{tianqichen-memonger}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Backward reduce\relax }}{3}{algorithm.5}}
+\newlabel{alg:backward-reduce}{{5}{3}{Backward reduce\relax }{algorithm.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Refinement}{3}{section.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Gain of AGBN algorithm on training accuracy under different batch sizes\relax }}{3}{figure.caption.7}}
+\newlabel{fig:accVsBz}{{3}{3}{Gain of AGBN algorithm on training accuracy under different batch sizes\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Ring allreduce}{3}{subsection.4.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Ring Allreduce\relax }}{3}{algorithm.6}}
+\newlabel{alg:ring-allreduce}{{6}{3}{Ring Allreduce\relax }{algorithm.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Memory monger}{3}{subsection.4.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Memonger optimized gradient graph generation exmaple \relax }}{3}{figure.caption.8}}
+\newlabel{fig:Memonger}{{4}{3}{Memonger optimized gradient graph generation exmaple \relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Adaptive global BN}{3}{subsection.4.3}}
+\bibstyle{ACM-Reference-Format}
+\bibdata{sample-bibliography}
+\newlabel{tocindent-1}{0pt}
+\newlabel{tocindent0}{0pt}
+\newlabel{tocindent1}{4.185pt}
+\newlabel{tocindent2}{10.34999pt}
+\newlabel{tocindent3}{0pt}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Gain of AGBN algorithm on training speed relative to GBN algorithm\relax }}{4}{figure.caption.9}}
+\newlabel{fig:speedVsBz}{{5}{4}{Gain of AGBN algorithm on training speed relative to GBN algorithm\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{4}{section.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Future work}{4}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{4}{section.7}}
+\@writefile{toc}{\contentsline {section}{Acknowledgments}{4}{section*.11}}
+\newlabel{TotPages}{{4}{4}{}{page.4}{}}
