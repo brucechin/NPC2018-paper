@@ -10,7 +10,7 @@ Deep neural networks received much success in many domains in the past years, an
     \end{center}
     \end{figure}
 
-To obtain global mean and variance, communication across all devices is required in each BN layer, which reduces the training speed greatly. As is well-known that the training accuracy increases with batch size generally and there exists a threshold after which the quality of model will be deteriorated\cite{keskar2016large}. Therefore, for large batch size cases such as imagenet\cite{krizhevsky2012imageneti}, the training accuracy loss resulting from local mean and variance is negligible compared to the communication cost. However, for memory-bounding cases such as semantic segmentation training on cityscapes dataset in self-driving field, the mini-batch size is only 3 at most with ResNet-50 in single GPU, and the training result is greatly limited under the original BN algorithm.
+To obtain global mean and variance, communication across all devices is required in each BN layer, which reduces the training speed greatly. As is well-known that the training accuracy increases with batch size generally and there exists a threshold after which the quality of model will be deteriorated\cite{keskar2016large}. Therefore, for large batch size cases such as imagenet\cite{krizhevsky2012imagenet}, the training accuracy loss resulting from local mean and variance is negligible compared to the communication cost. However, for memory-bounding cases such as semantic segmentation training on cityscapes dataset in self-driving field, the mini-batch size is only 3 at most with ResNet-50 in single GPU, and the training result is greatly limited under the original BN algorithm.
 
 
 % The data-model coupled parallelism leads to that the model is trained with mini-batch size, rather than original batch size, and the training accuracy is influenced correspondingly. As is well-known that the training accuracy increases with batch size generally and there exists a threshold after which the quality of model will be deteriorated\cite{keskar2016large}. For memory-bounding cases such as semantic segmentation training on cityscapes dataset, the mini-batch size is only 3 at most with ResNet-50 in single GPU, and the training result is greatly limited under the original BN algorithm. Therefore, communication across multiple devices is essential to guarantee the  thoroughly data parallelism. While for large batch size cases such as imagenet\cite{krizhevsky2012imageneti}, the training accuracy loss is negligible compared to the communication cost.
@@ -228,17 +228,20 @@ As we all know, we have to train a deep neural network for hundreds of epochs to
     \end{tabular}
 \end{table}
 
+
+\begin{figure}[!hbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figure/accVsBz.eps}
+    \caption{Gain of Global BN algorithm on training accuracy under different batch sizes}
+    \label{fig:accVsBz}
+    \end{figure}
+
 Also, We compare the gain on training accuracy of Global BN algorithm under different batch size as the figure \ref{fig:accVsBz} shows. The batch size is $BZ$ for the whole devices, so the mini-batch size in a single device $BZ_{mini}=BZ/n$, where $n$ indicates the count of devices. 
 As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
 
 
 
-\begin{figure}[!hbp]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figure/accVsBz.eps}
-    \caption{Gain of AGBN algorithm on training accuracy under different batch sizes}
-    \label{fig:accVsBz}
-    \end{figure}
+
 
 These strategies are applied to improve our algorithm.
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 11:52
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 13:34
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -742,14 +742,17 @@ nment
 \c@theorem=\count142
 
 Excluding comment 'screenonly' Include comment 'printonly'
-Include comment 'anonsuppress'
-No file sample-sigconf.aux.
+Include comment 'anonsuppress' (./sample-sigconf.aux
+
+LaTeX Warning: Label `fig:Memonger' multiply defined.
+
+)
 \openout1 = `sample-sigconf.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 40.
 LaTeX Font Info:    Try loading font information for OML+nxlmi on input line 40
 .
-(/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
 LaTeX Font Info:    ... okay on input line 40.
@@ -855,12 +858,11 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 40.
 LaTeX Info: Redefining \pageref on input line 40.
 LaTeX Info: Redefining \nameref on input line 40.
+
+(./sample-sigconf.out) (./sample-sigconf.out)
 \@outlinefile=\write5
 \openout5 = `sample-sigconf.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -974,9 +976,6 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 8.0pt on input line 151.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 151.
-
-LaTeX Warning: Reference `TotPages' on page 1 undefined on input line 151.
-
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 151.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
@@ -990,39 +989,11 @@ Package hyperref Warning: Option `pdfdisplaydoctitle' has already been used,
 (hyperref)                setting the option has no effect on input line 151.
 
 (./samplebody-conf.tex
-
-Package natbib Warning: Citation `ioffe2015batch' on page 1 undefined on input 
-line 3.
-
 File: figure/noreduce.png Graphic file (type QTm)
-<use  "figure/noreduce.png" >
-
-Package natbib Warning: Citation `keskar2016large' on page 1 undefined on input
- line 13.
-
-
-Package natbib Warning: Citation `krizhevsky2012imageneti' on page 1 undefined 
-on input line 13.
-
-
+ <use  "figure/noreduce.png" >
 Overfull \hbox (2.13826pt too wide) in paragraph at lines 13--14
 \T1/LinuxLibertineT-TLF/m/n/9 speed greatly. As is well-known that the train-in
 g ac-cu-racy in-creases
- []
-
-
-Package natbib Warning: Citation `muli-ps' on page 1 undefined on input line 37
-.
-
-
-Package natbib Warning: Citation `chen2015mxnet' on page 1 undefined on input l
-ine 37.
-
-
-Overfull \hbox (2.12405pt too wide) in paragraph at lines 37--38
-\T1/LinuxLibertineT-TLF/m/n/9 flex-i-ble and ef-fi-cient li-brary for Deep Lear
-n-ing[\T1/LinuxLibertineT-TLF/b/n/9 ? \T1/LinuxLibertineT-TLF/m/n/9 ]. Pa-ram-e
--ter server
  []
 
 
@@ -1045,31 +1016,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 217.
 [2.2]
-
-LaTeX Warning: Reference `fig:accVsBz' on page 3 undefined on input line 231.
-
 File: figure/accVsBz.eps Graphic file (type eps)
-<figure/accVsBz.eps>
-Overfull \hbox (6.45648pt too wide) in paragraph at lines 247--248
+ <figure/accVsBz.eps>
+Overfull \hbox (6.45648pt too wide) in paragraph at lines 250--251
 \T1/LinuxLibertineT-TLF/m/n/9 has brought up a new bandwidth-optimal allre-duce
  al-go-rithm named
  []
 
-
-Package natbib Warning: Citation `tianqichen-memonger' on page 3 undefined on i
-nput line 267.
-
 File: figure/memonger.png Graphic file (type QTm)
 <use  "figure/memonger.png" >
-Overfull \hbox (15.02975pt too wide) in paragraph at lines 284--285
+Overfull \hbox (15.02975pt too wide) in paragraph at lines 287--288
 \T1/LinuxLibertineT-TLF/m/n/9 the model has no con-ver-gence. $\OML/nxlmi/m/it/
 9 BZ[]$ \T1/LinuxLibertineT-TLF/m/n/9 is user-defined and $\OML/nxlmi/m/it/9 Is
 Converged$
  []
-
-
-LaTeX Warning: Reference `fig:speedVsBz' on page 3 undefined on input line 363.
-
 
 File: figure/speedVsBz.eps Graphic file (type eps)
 <figure/speedVsBz.eps> [3.3] Processing 'acks' comment.
@@ -1077,12 +1037,13 @@ File: figure/speedVsBz.eps Graphic file (type eps)
 
 
 Comment 'acks' writing to comment.cut. Straight input of comment.cut.
-(./comment.cut))
-No file sample-sigconf.bbl.
-
-Package natbib Warning: There were undefined citations.
-
-[4.4
+(./comment.cut)) (./sample-sigconf.bbl
+Missing character: There is no † in font LinLibertineT-tlf-t1!
+Missing character: There is no † in font LinLibertineT-tlf-t1!
+Missing character: There is no † in font LinLibertineT-tlf-t1!
+Missing character: There is no † in font LinLibertineT-tlf-t1!
+Missing character: There is no † in font LinLibertineT-tlf-t1!
+) [4.4
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
@@ -1092,19 +1053,16 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 158.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 158.
 
 
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17167 strings out of 493638
- 255332 string characters out of 6146797
- 369874 words of memory out of 5000000
- 20137 multiletter control sequences out of 15000+600000
+ 17204 strings out of 493638
+ 255978 string characters out of 6146797
+ 373029 words of memory out of 5000000
+ 20166 multiletter control sequences out of 15000+600000
  99521 words of font info for 92 fonts, out of 8000000 for 9000
  1489 hyphenation exceptions out of 8191
- 60i,11n,94p,1112b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,94p,1091b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on sample-sigconf.pdf (4 pages).
