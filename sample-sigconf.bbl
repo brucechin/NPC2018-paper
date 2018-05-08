@@ -53,18 +53,6 @@
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Chen, Xu, Zhang, and Guestrin}{Chen
-  et~al\mbox{.}}{2016}]%
-        {tianqichen-memonger}
-\bibfield{author}{\bibinfo{person}{Tianqi Chen}, \bibinfo{person}{Bing Xu},
-  \bibinfo{person}{Chiyuan Zhang}, {and} \bibinfo{person}{Carlos Guestrin}.}
-  \bibinfo{year}{2016}\natexlab{}.
-\newblock \showarticletitle{Training Deep Nets with Sublinear Memory Cost}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1604.06174}}
-  (\bibinfo{year}{2016}).
-\newblock
-
-
 \bibitem[\protect\citeauthoryear{Ioffe and Szegedy}{Ioffe and Szegedy}{2015}]%
         {ioffe2015batch}
 \bibfield{author}{\bibinfo{person}{Sergey Ioffe} {and}
@@ -73,6 +61,15 @@
   training by reducing internal covariate shift}. In
   \bibinfo{booktitle}{\emph{International conference on machine learning}}.
   \bibinfo{pages}{448--456}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Jeaugey}{Jeaugey}{2017}]%
+        {jeaugey2017nccl}
+\bibfield{author}{\bibinfo{person}{Sylvain Jeaugey}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{NCCL 2.0}.
+\newblock   (\bibinfo{year}{2017}).
 \newblock
 
 

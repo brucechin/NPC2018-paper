@@ -13,8 +13,6 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--no number and no volume in chen2015mxnet
 Warning--page numbers missing in both pages and numpages fields in chen2015mxnet
-Warning--no number and no volume in tianqichen-memonger
-Warning--page numbers missing in both pages and numpages fields in tianqichen-memonger
 Warning--empty publisher in ioffe2015batch
 Warning--empty address in ioffe2015batch
 Warning--no number and no volume in keskar2016large
@@ -28,43 +26,43 @@ Warning--empty address in muli-ps
 Warning--page numbers missing in both pages and numpages fields in muli-ps
 You've used 7 entries,
             5733 wiz_defined-function locations,
-            1481 strings with 18015 characters,
-and the built_in function-call counts, 9010 in all, are:
-= -- 1087
-> -- 460
+            1482 strings with 17938 characters,
+and the built_in function-call counts, 8645 in all, are:
+= -- 1002
+> -- 428
 < -- 0
-+ -- 157
-- -- 152
-* -- 718
-:= -- 971
++ -- 145
+- -- 144
+* -- 674
+:= -- 943
 add.period$ -- 34
 call.type$ -- 7
-change.case$ -- 64
+change.case$ -- 61
 chr.to.int$ -- 7
-cite$ -- 22
-duplicate$ -- 708
-empty$ -- 502
-format.name$ -- 180
-if$ -- 2155
+cite$ -- 20
+duplicate$ -- 698
+empty$ -- 495
+format.name$ -- 168
+if$ -- 2031
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 31
+missing$ -- 27
 newline$ -- 93
 num.names$ -- 56
-pop$ -- 326
+pop$ -- 314
 preamble$ -- 1
-purify$ -- 127
+purify$ -- 124
 quote$ -- 0
-skip$ -- 228
+skip$ -- 235
 stack$ -- 0
-substring$ -- 508
+substring$ -- 505
 swap$ -- 56
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 154
-warning$ -- 15
-while$ -- 38
+type$ -- 168
+warning$ -- 13
+while$ -- 42
 width$ -- 0
-write$ -- 150
-(There were 16 warnings)
+write$ -- 151
+(There were 14 warnings)

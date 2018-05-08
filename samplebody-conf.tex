@@ -117,7 +117,7 @@ We first take a look at new forward prapagation in Global BN algorithm. In the p
 
 %The last section is similar to the original BN algorithm except the operation of getting global variance and the output is identical to the original BN algorithm ignoring the reduce section as is shown in equation \ref{equ:normalization}.
 
-The reduce section is implemented By NCCL allreduce routine. In this section we compute the global mean and square of mean, and "global" means the output is based on the data of whole devices. $n$ indicates the count of devices.
+In this section we compute the global mean and square of mean, and "global" means the output is based on the data of whole devices. $n$ indicates the count of devices.
 
 \begin{algorithm}[h]
 \caption{Forward Reduce} %算法的名字
@@ -232,7 +232,7 @@ As we all know, we have to train a deep neural network for hundreds of epochs to
     \label{tab:overhead}
 \end{table}
 
-Obviously, the overhead from data sychronization across all devices occupies about $1/3$ of the total time of Global BN algorithm in most cases. Such high overhead from communication when training deep neural network is unbearable. We propose several pratical strategies to reduce it to an affordable range.
+Obviously, the overhead from data sychronization across all devices occupies about $1/3$ of the total time of Global BN algorithm in most cases. Such high overhead from communication when training deep neural network exceeds what we can bear. We will propose several pratical strategies to reduce it to an affordable range later.
 
 \begin{figure}[!hbp]
     \centering
@@ -242,17 +242,15 @@ Obviously, the overhead from data sychronization across all devices occupies abo
     \end{figure}
 
 Also, We compare the gain on training accuracy of Global BN algorithm under different batch size as the figure \ref{fig:accVsBz} shows. The batch size is $BZ$ for the whole devices, so the mini-batch size in a single device $BZ_{mini}=BZ/n$, where $n$ indicates the count of devices. 
-As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
+As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the accuracy earning from data sychronization during batch normalization decreases monotonously as batch size grows no matter for 4 GPUs or 8 GPUs. Therefore, switch from GBN to original BN algorithm under 
+large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
 
-
-
-These strategies are applied to improve our algorithm.
 
 \subsection{Ring allreduce}
 
 Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce"\cite{} which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
 
-Considering that we just use 8 GPUs at most for now, 
+Considering that we only use 8 GPUs at most for now, it is less likely to be dragged by the straggler. We apply Ring allreduce implemented in Nvidia Collective Communication Library\cite{jeaugey2017nccl} to accomplish data sychronization across all devices. NCCL implicitly indexes the GPUs into the optimal ring order under the hood. By taking topology of the interconnects between processors into account, it can achieve good performance for collectives communication.
 
 \begin{algorithm}
     \caption{Ring Allreduce}
@@ -267,18 +265,18 @@ Considering that we just use 8 GPUs at most for now,
 
 Assume the total amount of data is M bytes, and it is evenly distributed among N GPUs. Each GPU does $2(N-1)$ iteraions and sends and receives M/N bytes data in each iteration, so each GPU sents and receives $2X*(N-1)/N$ bytes data during the whole allreduce process. More importantly, because $(N-1)/N$ goes to $1$ with N growing larger, communication overhead for each GPU has a predictable and acceptable upper bound.
 
-\subsection{Memory monger}
+% \subsection{Memory monger}
 
 
-Memonger\cite{tianqichen-memonger} offers a more memory efficient training algorithm with a little extra computation cost by using automatic in-place operation and memory sharing optimization through computation graph analysis. It drops result of low cost operations and provides planning algorithm to give a sublinear memory cost model. The training upper bound of mini-batch size is increased to 8 with ResNet-50 in single GPU for cityscapes dataset.
+% Memonger\cite{tianqichen-memonger} offers a more memory efficient training algorithm with a little extra computation cost by using automatic in-place operation and memory sharing optimization through computation graph analysis. It drops result of low cost operations and provides planning algorithm to give a sublinear memory cost model. The training upper bound of mini-batch size is increased to 8 with ResNet-50 in single GPU for cityscapes dataset.
 
-\begin{figure}[h]
-    \begin{center}
-    \fbox{\includegraphics[width=0.8\linewidth]{figure/memonger.png}}
-    \caption{Memonger optimized gradient graph generation exmaple }%
-    \label{fig:Memonger}
-    \end{center}
-    \end{figure}
+% \begin{figure}[h]
+%     \begin{center}
+%     \fbox{\includegraphics[width=0.8\linewidth]{figure/memonger.png}}
+%     \caption{Memonger optimized gradient graph generation exmaple }%
+%     \label{fig:Memonger}
+%     \end{center}
+%     \end{figure}
 
 \subsection{Adaptive global BN}
 
