@@ -213,9 +213,10 @@ Then in reduce part, we will calculate the \textbf{global} mean of $\psi$ and $\
 As for the batch normalization part is similar to the original BN algorithm except using $\psi$ and $\phi$ calculated in Backward reduce part.
 \section{Refinement}
 
-As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. We evaluate the overhead by using 8 GTX 1080Ti GPU to  train image classification on Cifar10 dataset\cite{} with ResNet-20. The table below shows how much time it takes to train one epoch on average.
+As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. We evaluate the overhead by using 8 GTX 1080Ti GPU to  train image classification on Cifar10 dataset\cite{krizhevsky2014cifar} with ResNet-20. The table below shows how much time it takes to train one epoch on average.
 
 \begin{table}[!hbp]
+    
     \begin{tabular}{|c|c|c|c|}
         \hline Batch size & Original/s & Global BN/s & Overhead ratio/\% \\
         \hline    8 & 79.48  &  164.19  & 51.59 \\
@@ -225,9 +226,13 @@ As we all know, we have to train a deep neural network for hundreds of epochs to
         \hline    128  &  8.47  &  12.27  &  30.96 \\
         \hline    256  &  4.21  &   7.32  &   42.49 \\
         \hline
+        
     \end{tabular}
+    \caption{Time to train image classification on Cifar10 with ResNet-20 per epoch}
+    \label{tab:overhead}
 \end{table}
 
+Obviously, the overhead from data sychronization across all devices occupies about $1/3$ of the total time of Global BN algorithm in most cases. Such high overhead from communication when training deep neural network is unbearable. We propose several pratical strategies to reduce it to an affordable range.
 
 \begin{figure}[!hbp]
     \centering
@@ -241,13 +246,11 @@ As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4
 
 
 
-
-
 These strategies are applied to improve our algorithm.
 
 \subsection{Ring allreduce}
 
-Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce" which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
+Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce"\cite{} which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
 
 Considering that we just use 8 GPUs at most for now, 
 

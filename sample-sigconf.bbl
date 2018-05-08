@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -87,6 +87,18 @@
   Generalization gap and sharp minima}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1609.04836}}
   (\bibinfo{year}{2016}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Krizhevsky, Nair, and Hinton}{Krizhevsky
+  et~al\mbox{.}}{2014}]%
+        {krizhevsky2014cifar}
+\bibfield{author}{\bibinfo{person}{Alex Krizhevsky}, \bibinfo{person}{Vinod
+  Nair}, {and} \bibinfo{person}{Geoffrey Hinton}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{The CIFAR-10 dataset}.
+\newblock \bibinfo{journal}{\emph{online: http://www. cs. toronto.
+  edu/kriz/cifar. html}} (\bibinfo{year}{2014}).
 \newblock
 
 

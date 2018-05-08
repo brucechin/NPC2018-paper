@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 13:34
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  8 MAY 2018 14:25
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1018,14 +1018,24 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 [2.2]
 File: figure/accVsBz.eps Graphic file (type eps)
  <figure/accVsBz.eps>
-Overfull \hbox (6.45648pt too wide) in paragraph at lines 250--251
+Overfull \hbox (6.45648pt too wide) in paragraph at lines 253--254
 \T1/LinuxLibertineT-TLF/m/n/9 has brought up a new bandwidth-optimal allre-duce
  al-go-rithm named
  []
 
+
+Overfull \hbox (4.39816pt too wide) in paragraph at lines 253--254
+\T1/LinuxLibertineT-TLF/m/n/9 "Ring allre-duce"[] which dras-ti-cally re-duce t
+he com-mu-ni-ca-tion over-
+ []
+
 File: figure/memonger.png Graphic file (type QTm)
 <use  "figure/memonger.png" >
-Overfull \hbox (15.02975pt too wide) in paragraph at lines 287--288
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (15.02975pt too wide) in paragraph at lines 290--291
 \T1/LinuxLibertineT-TLF/m/n/9 the model has no con-ver-gence. $\OML/nxlmi/m/it/
 9 BZ[]$ \T1/LinuxLibertineT-TLF/m/n/9 is user-defined and $\OML/nxlmi/m/it/9 Is
 Converged$
@@ -1043,9 +1053,7 @@ Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
-) [4.4
-
-]
+) [4.4]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
  (./sample-sigconf.aux)
@@ -1057,10 +1065,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17204 strings out of 493638
- 255978 string characters out of 6146797
- 373029 words of memory out of 5000000
- 20166 multiletter control sequences out of 15000+600000
+ 17209 strings out of 493638
+ 256079 string characters out of 6146797
+ 373198 words of memory out of 5000000
+ 20171 multiletter control sequences out of 15000+600000
  99521 words of font info for 92 fonts, out of 8000000 for 9000
  1489 hyphenation exceptions out of 8191
  60i,11n,94p,1091b,466s stack positions out of 5000i,500n,10000p,200000b,80000s

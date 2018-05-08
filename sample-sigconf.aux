@@ -26,7 +26,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Data-model parallelism resulting from batch normalization layer\relax }}{1}{figure.caption.4}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:localBN}{{1}{1}{Data-model parallelism resulting from batch normalization layer\relax }{figure.caption.4}{}}
-\citation{}
+\citation{krizhevsky2014cifar}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related work}{2}{section.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{2}{section.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic of the process of global BN operator \relax }}{2}{figure.caption.5}}
@@ -41,35 +41,39 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Backward modification}{2}{subsection.3.2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Backward pre-processing\relax }}{2}{algorithm.4}}
 \newlabel{alg:backward-pre}{{4}{2}{Backward pre-processing\relax }{algorithm.4}{}}
+\citation{}
 \citation{tianqichen-memonger}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Backward reduce\relax }}{3}{algorithm.5}}
 \newlabel{alg:backward-reduce}{{5}{3}{Backward reduce\relax }{algorithm.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Refinement}{3}{section.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Time to train image classification on Cifar10 with ResNet-20 per epoch\relax }}{3}{table.caption.6}}
+\newlabel{tab:overhead}{{1}{3}{Time to train image classification on Cifar10 with ResNet-20 per epoch\relax }{table.caption.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Gain of Global BN algorithm on training accuracy under different batch sizes\relax }}{3}{figure.caption.7}}
 \newlabel{fig:accVsBz}{{3}{3}{Gain of Global BN algorithm on training accuracy under different batch sizes\relax }{figure.caption.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Ring allreduce}{3}{subsection.4.1}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Ring Allreduce\relax }}{3}{algorithm.6}}
 \newlabel{alg:ring-allreduce}{{6}{3}{Ring Allreduce\relax }{algorithm.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Memory monger}{3}{subsection.4.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Memonger optimized gradient graph generation exmaple \relax }}{3}{figure.caption.8}}
-\newlabel{fig:Memonger}{{4}{3}{Memonger optimized gradient graph generation exmaple \relax }{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Adaptive global BN}{3}{subsection.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{3}{section.5}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{sample-bibliography}
 \bibcite{chen2015mxnet}{{1}{2015}{{Chen et~al\unhbox \voidb@x \hbox {.}}}{{Chen, Li, Li, Lin, Wang, Wang, Xiao, Xu, Zhang, and Zhang}}}
 \bibcite{tianqichen-memonger}{{2}{2016}{{Chen et~al\unhbox \voidb@x \hbox {.}}}{{Chen, Xu, Zhang, and Guestrin}}}
 \bibcite{ioffe2015batch}{{3}{2015}{{Ioffe and Szegedy}}{{Ioffe and Szegedy}}}
 \bibcite{keskar2016large}{{4}{2016}{{Keskar et~al\unhbox \voidb@x \hbox {.}}}{{Keskar, Mudigere, Nocedal, Smelyanskiy, and Tang}}}
-\bibcite{krizhevsky2012imagenet}{{5}{2012}{{Krizhevsky et~al\unhbox \voidb@x \hbox {.}}}{{Krizhevsky, Sutskever, and Hinton}}}
-\bibcite{muli-ps}{{6}{2014}{{Li et~al\unhbox \voidb@x \hbox {.}}}{{Li, Andersen, Park, Smola, Ahmed†, Josifovski†, Long†, Shekita†, and Su†}}}
+\bibcite{krizhevsky2014cifar}{{5}{2014}{{Krizhevsky et~al\unhbox \voidb@x \hbox {.}}}{{Krizhevsky, Nair, and Hinton}}}
+\bibcite{krizhevsky2012imagenet}{{6}{2012}{{Krizhevsky et~al\unhbox \voidb@x \hbox {.}}}{{Krizhevsky, Sutskever, and Hinton}}}
+\bibcite{muli-ps}{{7}{2014}{{Li et~al\unhbox \voidb@x \hbox {.}}}{{Li, Andersen, Park, Smola, Ahmed†, Josifovski†, Long†, Shekita†, and Su†}}}
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
 \newlabel{tocindent1}{4.185pt}
 \newlabel{tocindent2}{10.34999pt}
 \newlabel{tocindent3}{0pt}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Memonger optimized gradient graph generation exmaple \relax }}{4}{figure.caption.8}}
+\newlabel{fig:Memonger}{{4}{4}{Memonger optimized gradient graph generation exmaple \relax }{figure.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Gain of AGBN algorithm on training speed relative to GBN algorithm\relax }}{4}{figure.caption.9}}
 \newlabel{fig:speedVsBz}{{5}{4}{Gain of AGBN algorithm on training speed relative to GBN algorithm\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{4}{section.5}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Future work}{4}{section.6}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{4}{section.7}}
 \@writefile{toc}{\contentsline {section}{Acknowledgments}{4}{section*.11}}
