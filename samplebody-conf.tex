@@ -211,26 +211,106 @@ Then in reduce part, we will calculate the \textbf{global} mean of $\psi$ and $\
 
 
 As for the batch normalization part is similar to the original BN algorithm except using $\psi$ and $\phi$ calculated in Backward reduce part.
+
+
+\section{model building}
+
+As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. In order to maximize the utilization of our multi-GPU machine, we want to build a training time prediction model to guide the training process. We divide the training process into two parts: computation cost and communication cost, and we will analyse them one by one.
+
+
+\subsection{Communication overhead}
+
+Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce"\cite{baidu-allreduce} which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
+
+Considering that we only use 8 GPUs at most for now, it is less likely to be dragged by the straggler. We apply Ring allreduce implemented in Nvidia Collective Communication Library\cite{jeaugey2017nccl} to accomplish data sychronization across all devices. NCCL implicitly indexes the GPUs into the optimal ring order under the hood. By taking topology of the interconnects between processors into account, it can achieve good performance for collectives communication.
+
+%add ring allreduce demo picture here
+
+\begin{algorithm}
+    \caption{Ring Allreduce}
+    \label{alg:ring-allreduce}
+    \begin{algorithmic}[1]
+        \State Set up communication ring
+        \State Divide array into N equal-size chunks
+        \State Scatter-reduce for N-1 iterations
+        \State Allgather for N-1 iterations
+    \end{algorithmic}
+\end{algorithm}
+
+Assume the total amount of data is M bytes, and it is evenly distributed among N GPUs. Each GPU does $2(N-1)$ iteraions and sends and receives M/N bytes data in each iteration, so each GPU sents and receives $2M*(N-1)/N$ bytes data during the whole allreduce process. If the bandwidth between GPUs is S byte/s, the expected time to finish allreduce is :
+\begin{equation}
+    CommTime = 2M*(N-1)/(N*S)
+\end{equation}
+
+
+ More importantly, because $(N-1)/N$ goes to $1$ with N growing larger, communication overhead for each GPU has a predictable and acceptable upper bound.
+
+\begin{table}[h]
+    
+    \begin{tabular}{|c|c|c|c|}
+        \hline GPUs | data Size(MB) & 10 & 100 & 1000 \\
+        \hline  2 & 2.784 & 27.855 & 279.106 \\
+        \hline  3 &	3.693 &	36.805 &	370.472 \\
+        \hline　4 &	4.331 &	42.449 &	423.478 \\
+        \hline  5 &	4.638 &	46.119 &	458.021 \\
+        \hline  6 &	4.819 &	47.841 &	475.478 \\
+        \hline  7 &	5.001 & 48.934 &	489.464 \\
+        \hline  8 &	5.148 &	50.038 &	499.994 \\
+        \hline
+    \end{tabular}{}
+    \caption{Time(seconds) used to allreduce different sizes of data on multi-GPUs machine}
+    \label{tab:allreduce-overhead}
+\end{table}
+
+
+To validate our communication overhead prediction model, we did an data allreduce experiment on 8 GTX 1080Ti GPUs. As the table\ref{tab:allreduce-overhead} shows, the result of our experiment agrees well with our model. Communication time grows linearly with larger data size, and increases slower with more GPUs.
+
+\subsection{Computation cost}
+
+Deep neural network consists of many kinds of layers like convolutional/batch normalization/pooling/activation and so on. We would only focus on convolution layer here because other layers like fullyconnected and pooling layer often takes less than 10\% of the total time used in training a DNN .For any convolutional layer, its time complexity is :
+
+\begin{equation}
+    Flops \sim O(M^2 \cdot K^2 \cdot C_{in} \cdot C_{out})
+\end{equation}
+
+Here $M$ is the spatial size of the output feature map. $K$ is the length of the filter. $C_{in}$ is the number osf input channels of last layer. $C_{out}$ is the number of filters(also known as the output channels of this layer). Especially, M is determined by input matrix size $X$, length of the filter $K$, $Padding$ and $Stride$ (We assume the input and filters are square to simplify the expression):
+
+\begin{equation}
+    M = (X - K + 2 * Padding) / Stride + 1
+\end{equation}
+
+Because a convolutional neural network consists of many convolutional layers with different settings, we sum them up and get the total flops needed to:
+
+\begin{equation}
+    Flops \sim O(\sum_{l=1}^{D} M_{l}^{2} \cdot K_{l}^{2} \cdot C_{l-1} \cdot C_{l})
+\end{equation}
+
+Here $l$ is the index of a convolutional layer. $D$ is the number of convolutional layers\cite{kaiming-cnn-constrained-time}. In short, multiplication within layer and accumulation between layers. 
+
+\subsection{Expected time prediction}
+
+
+
 \section{Refinement}
 
 As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. We evaluate the overhead by using 8 GTX 1080Ti GPU to  train image classification on Cifar10 dataset\cite{krizhevsky2014cifar} with ResNet-20. The table below shows how much time it takes to train one epoch on average.
 
-\begin{table}[!hbp]
+% \begin{table}[!hbp]
     
-    \begin{tabular}{|c|c|c|c|}
-        \hline Batch size & Original/s & Global BN/s & Overhead ratio/\% \\
-        \hline    8 & 79.48  &  164.19  & 51.59 \\
-        \hline    16 & 60.72  &  91.32  & 33.51 \\
-        \hline    32 &  31.98   &  44.13  &  27.53 \\
-        \hline    64  &  16.53   &  23.48   & 29.60 \\
-        \hline    128  &  8.47  &  12.27  &  30.96 \\
-        \hline    256  &  4.21  &   7.32  &   42.49 \\
-        \hline
+%     \begin{tabular}{|c|c|c|c|}
+%         \hline Batch size & Original/s & Global BN/s & Overhead ratio/\% \\
+%         \hline    8 & 79.48  &  164.19  & 51.59 \\
+%         \hline    16 & 60.72  &  91.32  & 33.51 \\
+%         \hline    32 &  31.98   &  44.13  &  27.53 \\
+%         \hline    64  &  16.53   &  23.48   & 29.60 \\
+%         \hline    128  &  8.47  &  12.27  &  30.96 \\
+%         \hline    256  &  4.21  &   7.32  &   42.49 \\
+%         \hline
         
-    \end{tabular}
-    \caption{Time to train image classification on Cifar10 with ResNet-20 per epoch}
-    \label{tab:overhead}
-\end{table}
+%     \end{tabular}
+%     \caption{Time to train image classification on Cifar10 with ResNet-20 per epoch}
+%     \label{tab:overhead}
+% \end{table}
 
 Obviously, the overhead from data sychronization across all devices occupies about $1/3$ of the total time of Global BN algorithm in most cases. Such high overhead from communication when training deep neural network exceeds what we can bear. We will propose several pratical strategies to reduce it to an affordable range later.
 
@@ -245,26 +325,6 @@ Also, We compare the gain on training accuracy of Global BN algorithm under diff
 As we can see, for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the accuracy earning from data sychronization during batch normalization decreases monotonously as batch size grows no matter for 4 GPUs or 8 GPUs. Therefore, switch from GBN to original BN algorithm under 
 large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
 
-
-\subsection{Ring allreduce}
-
-Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce"\cite{} which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
-
-Considering that we only use 8 GPUs at most for now, it is less likely to be dragged by the straggler. We apply Ring allreduce implemented in Nvidia Collective Communication Library\cite{jeaugey2017nccl} to accomplish data sychronization across all devices. NCCL implicitly indexes the GPUs into the optimal ring order under the hood. By taking topology of the interconnects between processors into account, it can achieve good performance for collectives communication.
-
-\begin{algorithm}
-    \caption{Ring Allreduce}
-    \label{alg:ring-allreduce}
-    \begin{algorithmic}[1]
-        \State Set up communication ring
-        \State Divide array into N equal-size chunks
-        \State Scatter-reduce for N-1 iterations
-        \State Allgather for N-1 iterations
-    \end{algorithmic}
-\end{algorithm}
-
-Assume the total amount of data is M bytes, and it is evenly distributed among N GPUs. Each GPU does $2(N-1)$ iteraions and sends and receives M/N bytes data in each iteration, so each GPU sents and receives $2X*(N-1)/N$ bytes data during the whole allreduce process. More importantly, because $(N-1)/N$ goes to $1$ with N growing larger, communication overhead for each GPU has a predictable and acceptable upper bound.
-
 \subsection{Memory monger}
 
 Cifar10 dataset is a relatively small one. When deep neural network is applied in some real scenarios like Cityscapes,  the ResNet-50 mini-batch size on single GTX 1080Ti graphics card is 3 at most, which is far from enough. 
@@ -278,6 +338,7 @@ Memonger\cite{tianqichen-memonger} offers a more memory efficient training algor
     \label{fig:Memonger}
     \end{center}
     \end{figure}
+
 
 \subsection{Adaptive global BN}
 
@@ -315,7 +376,7 @@ We use the history data including batch size and training accuracy of a specific
 
 
 
-This section is skipped if the batch size $BZ$ is sufficiently large or the model has no convergence. $BZ_{max}$ is user-defined and $IsConverged$ is determined by the convergence criterion.
+% This section is skipped if the batch size $BZ$ is sufficiently large or the model has no convergence. $BZ_{max}$ is user-defined and $IsConverged$ is determined by the convergence criterion.
  
 %  In this section we compute the global mean and square of mean and "global" means the output is based on the data of whole devices. $n$ indicates the count of devices.
 
@@ -395,12 +456,13 @@ This section is skipped if the batch size $BZ$ is sufficiently large or the mode
 
 
 The communication across all devices in re duce section leads to the speed loss inevitably. Relative to the original BN algorithm, the training speed of GBN algorithm is about 75\% for 4 GPUs and 70\% for 8 GPUs. In our AGBN algorithm, the communication will not occur until the training process converges. For training on Cifar10 with 50 epochs, the average training speed of AGBN algorithm under different batch sizes is shown in figure\ref{fig:speedVsBz} and the training speed increases by about 10\%.
-\begin{figure}
-\centering
-\includegraphics[width=0.8\linewidth]{figure/speedVsBz.eps}
-\caption{Gain of AGBN algorithm on training speed relative to GBN algorithm}
-\label{fig:speedVsBz}
-\end{figure}
+
+% \begin{figure}
+% \centering
+% \includegraphics[width=0.8\linewidth]{figure/speedVsBz.eps}
+% \caption{Gain of AGBN algorithm on training speed relative to GBN algorithm}
+% \label{fig:speedVsBz}
+% \end{figure}
 
 % Finally we apply the proposed algorithm to self-driving scenario, where batch size is limited by memory because of the high-quality and abundant images. The cityscapes dataset is deployed to perform semantic segmantation and the depth of ResNet is 50. Only two images are assigned to one device while three pieces will run out of memory due to its high-quality, so the batch size is 16 for whole devices. With global BN algorithm, the maximum of training-accuracy is increased by 0.6$\%$, and about half of the epochs are needed under the same training accuracy as origin BN algorithm.
 
