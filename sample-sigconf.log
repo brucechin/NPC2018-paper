@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  17 MAY 2018 11:48
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  18 MAY 2018 15:37
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1039,7 +1039,7 @@ File: figure/memonger.png Graphic file (type QTm)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Reference `fig:speedVsBz' on page 4 undefined on input line 458.
+LaTeX Warning: Reference `fig:speedVsBz' on page 4 undefined on input line 477.
 
 
 Processing 'acks' comment.
@@ -1047,8 +1047,10 @@ Processing 'acks' comment.
 
  Comment 'acks' writing to comment.cut.
 Straight input of comment.cut. (./comment.cut)) (./sample-sigconf.bbl
-LaTeX Info: Redefining \tempurl on input line 90.
+Underfull \vbox (badness 3657) has occurred while \output is active []
+
  [4.4]
+LaTeX Info: Redefining \tempurl on input line 90.
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
@@ -1072,12 +1074,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17407 strings out of 493638
- 259360 string characters out of 6146797
- 375457 words of memory out of 5000000
- 20367 multiletter control sequences out of 15000+600000
+ 17408 strings out of 493638
+ 259371 string characters out of 6146797
+ 376044 words of memory out of 5000000
+ 20368 multiletter control sequences out of 15000+600000
  99521 words of font info for 92 fonts, out of 8000000 for 9000
  1489 hyphenation exceptions out of 8191
- 60i,11n,94p,1091b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,94p,1091b,552s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on sample-sigconf.pdf (5 pages).

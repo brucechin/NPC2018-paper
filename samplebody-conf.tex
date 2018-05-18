@@ -218,7 +218,7 @@ As for the batch normalization part is similar to the original BN algorithm exce
 As we all know, we have to train a deep neural network for hundreds of epochs to make it converge, which means that communication overhead between GPUs in Global BN algorithm can not be ignored. In order to maximize the utilization of our multi-GPU machine, we want to build a training time prediction model to guide the training process. We divide the training process into two parts: computation cost and communication cost, and we will analyse them one by one.
 
 
-\subsection{Communication overhead}
+\subsection{Communication cost}
 
 Normally, communication between GPUs is done in the way that the data is sent from multiple GPUs to a single reducer GPU, which becomes the primary bottleneck in how fast the training can be done. It grows worse with data volume expanding. Baidu Research has brought up a new bandwidth-optimal allreduce algorithm named "Ring allreduce"\cite{baidu-allreduce} which drastically reduce the communication overhead. However, it is still constrained primarily by the slowest communication mechanism between devices like Infiniband, not by the number of GPUs now.
 
@@ -265,6 +265,8 @@ Assume the total amount of data is M bytes, and it is evenly distributed among N
 
 To validate our communication overhead prediction model, we did an data allreduce experiment on 8 GTX 1080Ti GPUs. As the table\ref{tab:allreduce-overhead} shows, the result of our experiment agrees well with our model. Communication time grows linearly with larger data size, and increases slower with more GPUs.
 
+
+
 \subsection{Computation cost}
 
 Deep neural network consists of many kinds of layers like convolutional/batch normalization/pooling/activation and so on. We would only focus on convolution layer here because other layers like fullyconnected and pooling layer often takes less than 10\% of the total time used in training a DNN .For any convolutional layer, its time complexity is :
@@ -287,7 +289,12 @@ Because a convolutional neural network consists of many convolutional layers wit
 
 Here $l$ is the index of a convolutional layer. $D$ is the number of convolutional layers\cite{kaiming-cnn-constrained-time}. In short, multiplication within layer and accumulation between layers. 
 
+\subsection{Other overhead}
+
+
+
 \subsection{Expected time prediction}
+
 
 
 
@@ -453,6 +460,18 @@ We use the history data including batch size and training accuracy of a specific
 % \end{figure}
 
 % We compare the gain on training accuracy of AGBN algorithm under different batch size as the figure \ref{fig:accVsBz} shows, and for case $BZ=8$, the training accuracy raises about 2.1$\%$ and 4.4$\%$ for 4 devices and 8 devices, respectively. It is clear that the earning reduces monotonously as batch size grows no matter for 4GPUs or 8GPUs. Therefore, switch from GBN to original BN algorithm under large batch size case is appropriate to gain a trade-off between accuracy and efficiency.
+
+\subsection{experiment on single GPU}
+
+1.test training time prediction on cifar 10 and cityscape
+
+\subsection{experiment on multi-GPUs}
+
+1.acc increase due to GBN on cifar 10 and cityscape
+2.for cifar 10 is too small to make multi-GPU machine fully loaded, we test our traiuing time prediction model only on cityscape
+but because we use memonger to load more pictures into DNN, computation cost increases by xxx
+3. Adaptive GBN time saving compared to naive GBN.
+
 
 
 The communication across all devices in re duce section leads to the speed loss inevitably. Relative to the original BN algorithm, the training speed of GBN algorithm is about 75\% for 4 GPUs and 70\% for 8 GPUs. In our AGBN algorithm, the communication will not occur until the training process converges. For training on Cifar10 with 50 epochs, the average training speed of AGBN algorithm under different batch sizes is shown in figure\ref{fig:speedVsBz} and the training speed increases by about 10\%.
