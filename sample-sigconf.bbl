@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{7}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -65,33 +65,6 @@
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Gibiansky}{Gibiansky}{2017}]%
-        {baidu-allreduce}
-\bibfield{author}{\bibinfo{person}{Andrew Gibiansky}.}
-  \bibinfo{year}{2017}\natexlab{}.
-\newblock \showarticletitle{Bringing HPC techniques to deep learning}.
-\newblock  (\bibinfo{year}{2017}).
-\newblock
-\urldef\tempurl%
-\url{http://research.baidu.com/bringing-hpc-techniques-deep-learning}
-\showURL{%
-\tempurl}
-
-
-\bibitem[\protect\citeauthoryear{He and Sun}{He and Sun}{2014}]%
-        {kaiming-cnn-constrained-time}
-\bibfield{author}{\bibinfo{person}{Kaiming He} {and} \bibinfo{person}{Jian
-  Sun}.} \bibinfo{year}{2014}\natexlab{}.
-\newblock \showarticletitle{Convolutional Neural Networks at Constrained Time
-  Cost}.
-\newblock  (\bibinfo{year}{2014}).
-\newblock
-\urldef\tempurl%
-\url{https://arxiv.org/abs/1412.1710}
-\showURL{%
-\tempurl}
-
-
 \bibitem[\protect\citeauthoryear{Ioffe and Szegedy}{Ioffe and Szegedy}{2015}]%
         {ioffe2015batch}
 \bibfield{author}{\bibinfo{person}{Sergey Ioffe} {and}
@@ -100,15 +73,6 @@
   training by reducing internal covariate shift}. In
   \bibinfo{booktitle}{\emph{International conference on machine learning}}.
   \bibinfo{pages}{448--456}.
-\newblock
-
-
-\bibitem[\protect\citeauthoryear{Jeaugey}{Jeaugey}{2017}]%
-        {jeaugey2017nccl}
-\bibfield{author}{\bibinfo{person}{Sylvain Jeaugey}.}
-  \bibinfo{year}{2017}\natexlab{}.
-\newblock \bibinfo{title}{NCCL 2.0}.
-\newblock   (\bibinfo{year}{2017}).
 \newblock
 
 

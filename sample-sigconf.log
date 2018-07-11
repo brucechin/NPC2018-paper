@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  18 MAY 2018 15:37
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.3)  14 JUN 2018 16:09
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1002,44 +1002,47 @@ g ac-cu-racy in-creases
  []
 
 
+Overfull \hbox (8.512pt too wide) in paragraph at lines 34--35
+\T1/LinuxLibertineT-TLF/m/n/9 mal-iza-tion brings those ben-e-fits:network trai
+n-ing faster, higher learn-
+ []
+
+
 Underfull \vbox (badness 3471) has occurred while \output is active []
 
  [1.1
 
 ]
-File: figure/reduce.png Graphic file (type QTm)
+Overfull \hbox (4.5765pt too wide) in paragraph at lines 37--38
+[]\T1/LinuxLibertineT-TLF/m/n/9 Parameter server[[]] is a frame-work for dis-tr
+ibuted ma-chine learn-
+ []
 
+File: figure/reduce.png Graphic file (type QTm)
 <use  "figure/reduce.png" >
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 100.
+(Font)              scaled to size 9.0pt on input line 63.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 102.
+put line 65.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 219.
+(Font)              scaled to size 9.0pt on input line 178.
 [2.2]
-Overfull \hbox (6.45648pt too wide) in paragraph at lines 223--224
-\T1/LinuxLibertineT-TLF/m/n/9 has brought up a new bandwidth-optimal allre-duce
- al-go-rithm named
- []
-
-Missing character: There is no 　 in font LinLibertineT-tlf-t1!
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3.3]
 File: figure/accVsBz.eps Graphic file (type eps)
  <figure/accVsBz.eps>
 File: figure/memonger.png Graphic file (type QTm)
- <use  "figure/memonger.png" >
+ <use  "figure/memonger.png" > [3.3]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `fig:speedVsBz' on page 4 undefined on input line 477.
+LaTeX Warning: Reference `fig:speedVsBz' on page 4 undefined on input line 444.
 
 
 Processing 'acks' comment.
@@ -1047,22 +1050,18 @@ Processing 'acks' comment.
 
  Comment 'acks' writing to comment.cut.
 Straight input of comment.cut. (./comment.cut)) (./sample-sigconf.bbl
-Underfull \vbox (badness 3657) has occurred while \output is active []
-
- [4.4]
-LaTeX Info: Redefining \tempurl on input line 90.
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
 Missing character: There is no † in font LinLibertineT-tlf-t1!
-)
-[5.5
+) [4.4
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
- (./sample-sigconf.aux)
+
+(./sample-sigconf.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 158.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 158.
 
@@ -1074,12 +1073,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17408 strings out of 493638
- 259371 string characters out of 6146797
- 376044 words of memory out of 5000000
- 20368 multiletter control sequences out of 15000+600000
+ 17391 strings out of 493638
+ 259010 string characters out of 6146797
+ 375151 words of memory out of 5000000
+ 20351 multiletter control sequences out of 15000+600000
  99521 words of font info for 92 fonts, out of 8000000 for 9000
  1489 hyphenation exceptions out of 8191
- 60i,12n,94p,1091b,552s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,94p,1091b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sample-sigconf.pdf (5 pages).
+Output written on sample-sigconf.pdf (4 pages).
